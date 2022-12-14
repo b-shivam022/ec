@@ -7,7 +7,7 @@ const AppProvider = ({ children }) => {
   const [wishList, setWishList] = useState([]);
   const [cartItem, setCartItem] = useState([{
     id:0,
-    quantity:0
+    quantity:1
   }]);
 
   useEffect(() => {

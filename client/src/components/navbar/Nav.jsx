@@ -47,7 +47,7 @@ const Nav = () => {
           </div>
           <Link to="/MyCart">
             <div className="common">
-              <BsCart2 /> ({cartItem.length}) Bag
+              <BsCart2 /> ({cartItem[0].id===0?0:cartItem.length}) Bag
             </div>
           </Link>
         </div>
