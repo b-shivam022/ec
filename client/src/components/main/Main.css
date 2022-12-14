@@ -1,0 +1,25 @@
+main{
+    display: flex;
+    height: auto;
+    gap: 20px;
+    justify-content: center;
+    box-shadow: rgb(141, 140, 140) 0 0 5px 0;
+}
+
+.main_data{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.main_img{
+    height: 70px;
+}
+
+.main_title{
+    margin-top: 5px;
+    font-weight: 600;
+}
