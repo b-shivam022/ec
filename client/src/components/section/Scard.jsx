@@ -4,19 +4,30 @@ import { useGlobalContext } from "../context/Context";
 
 const Scard = (item) => {
   const [isHover, setIsHover] = useState(false);
-  const {setCartItem} = useGlobalContext();
-
+  const { setCartItem, cartItem } = useGlobalContext();
 
   const truncate = (str, n) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   };
 
-  const handleCart = (id) =>{
-    setCartItem((prev)=>{
-      return[...prev,id]
-    })
-  }
-
+  const handleCart = (id) => {
+    let flag = 0;
+    cartItem.forEach((el) => {
+      if (el.id === id) {
+        flag++;
+        ++el.quantity;
+        return 0;
+      }
+    });
+    if(!flag){
+    setCartItem((prev) => {
+      if (cartItem[0].id==0) {
+        return [{id:id,quantity:1}];
+      }
+      return [...prev, {id:id,quantity:0}];
+    });}
+  };
+  console.log(cartItem);
 
   return (
     <div
@@ -37,7 +48,9 @@ const Scard = (item) => {
           <h5>{truncate(item.title, 55)}</h5>
         </Link>
         {isHover ? (
-          <div className="item_cart"  onClick={()=>handleCart(item.id)}>ADD TO CART</div>
+          <div className="item_cart" onClick={() => handleCart(item.id)}>
+            Add To Cart
+          </div>
         ) : (
           <div className="item_price">
             <h4>$ {item.price}</h4>

@@ -5,7 +5,10 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [wishList, setWishList] = useState([]);
-  const [cartItem, setCartItem] = useState([]);
+  const [cartItem, setCartItem] = useState([{
+    id:0,
+    quantity:0
+  }]);
 
   useEffect(() => {
     if (window.localStorage.getItem("Token") === "asdfghjklqwertyuiop") {

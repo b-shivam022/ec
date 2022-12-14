@@ -24,9 +24,22 @@ const MyCart = () => {
       ) : (
         <div className="myList">
           <div className="cart_head">SHOPPING CART</div>
-          {cartItem.map((item) => {
-            return <CartItem id={item} />;
-          })}
+          {cartItem.length ? (
+            cartItem.map((item) => {
+              return <CartItem id={item} />;
+            })
+          ) : (
+            <div className="cart_empty">
+              <div className="emptyCart_img">
+                <img
+                  src="images/undraw_empty_cart_co35.svg"
+                  alt="empty_cart"
+                />
+              </div>
+              <div className="empty_heading">Your Cart is Empty</div>
+              <Link to="/" className="empty_link">Go back to explore</Link>
+            </div>
+          )}
         </div>
       )}
     </section>

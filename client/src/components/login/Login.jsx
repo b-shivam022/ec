@@ -11,27 +11,23 @@ const Login = () => {
     console.log(userData);
     if (userData.email && userData.password) {
       window.localStorage.setItem("Token", "asdfghjklqwertyuiop");
-      if (userData) {
-        return <redirect to="/about" />;
-      }
     }
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(value);
-    setUserData(value);
+    setUserData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
 
   return (
     <section>
       <div>
-        <form
-          method="POST"
-          onSubmit={(e) => {
-            handleSubmit();
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <input
             type="email"
             placeholder="Enter your mail"

@@ -3,13 +3,14 @@ import { useGlobalContext } from "../context/Context";
 import SectionData from "../section/SectionData";
 
 const CartItem = ({ id }) => {
-  const { title, price, image} = SectionData[id - 1];
-    const {cartItem,setCartItem} = useGlobalContext();
+  const { title, price, image } = SectionData[id - 1];
+  const { cartItem, setCartItem } = useGlobalContext();
+  
 
   const handleClick = () => {
-    const newA = cartItem.filter((v)=>{
-        return v!==id
-    })
+    const newA = cartItem.filter((v) => {
+      return v !== id;
+    });
     setCartItem(newA);
   };
 
