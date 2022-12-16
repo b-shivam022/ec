@@ -4,7 +4,7 @@ import { useGlobalContext } from "../context/Context";
 
 const Scard = (item) => {
   const [isHover, setIsHover] = useState(false);
-  const { setCartItem, cartItem } = useGlobalContext();
+  const { setCartItems, cartItems } = useGlobalContext();
 
   const truncate = (str, n) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -12,23 +12,24 @@ const Scard = (item) => {
 
   const handleCart = (id) => {
     let flag = 0;
-    cartItem.forEach((el) => {
+    cartItems.forEach((el) => {
       if (el.id === id) {
         flag++;
         ++el.quantity;
         return 0;
       }
     });
-    if(!flag){
-    setCartItem((prev) => {
-      if (cartItem[0].id==0) {
-        return [{id:id,quantity:1}];
-      }
-      return [...prev, {id:id,quantity:0}];
-    });}
-  };
-  console.log(cartItem);
+    if (!flag) {
+      setCartItems((prev) => {
+        if (cartItems[0].id == 0) {
+          return [{ id: id, quantity: 1 }];
+        }
+        return [...prev, { id: id, quantity: 1 }];
+      });
+    }
+  }
 
+  
   return (
     <div
       key={item.id}

@@ -4,7 +4,7 @@ import CartItem from "./CartItem";
 import "./MyCart.css";
 
 const MyCart = () => {
-  const { isLogin, cartItem } = useGlobalContext();
+  const { isLogin, cartItems } = useGlobalContext();
 
   return (
     <section>
@@ -24,9 +24,9 @@ const MyCart = () => {
       ) : (
         <div className="myList">
           <div className="cart_head">SHOPPING CART</div>
-          {cartItem.length ? (
-            cartItem.map((item) => {
-              return <CartItem id={item} />;
+          {(cartItems[0].id!==0) ? (
+            cartItems.map((item) => {
+              return <CartItem item={item} />;
             })
           ) : (
             <div className="cart_empty">

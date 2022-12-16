@@ -5,7 +5,7 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [wishList, setWishList] = useState([]);
-  const [cartItem, setCartItem] = useState([{
+  const [cartItems, setCartItems] = useState([{
     id:0,
     quantity:1
   }]);
@@ -24,8 +24,8 @@ const AppProvider = ({ children }) => {
         setIsLogin,
         wishList,
         setWishList,
-        cartItem,
-        setCartItem,
+        cartItems,
+        setCartItems,
       }}
     >
       {children}

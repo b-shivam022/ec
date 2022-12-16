@@ -6,7 +6,7 @@ import { BsCart2 } from "react-icons/bs";
 import { useGlobalContext } from "../context/Context";
 
 const Nav = () => {
-  const { isLogin, setIsLogin, cartItem, wishList } = useGlobalContext();
+  const { isLogin, setIsLogin, cartItems, wishList } = useGlobalContext();
 
   const handleLogout = () => {
     setIsLogin(false);
@@ -47,7 +47,7 @@ const Nav = () => {
           </div>
           <Link to="/MyCart">
             <div className="common">
-              <BsCart2 /> ({cartItem[0].id===0?0:cartItem.length}) Bag
+              <BsCart2 /> ({cartItems[0].id===0?0:cartItems.length}) Bag
             </div>
           </Link>
         </div>
