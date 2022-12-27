@@ -1,13 +1,10 @@
 import React, { useRef, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./Slide.css";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 
-// import required modules
 import { Navigation, Mousewheel, Keyboard,Autoplay } from "swiper";
 
 const Slide = () => {

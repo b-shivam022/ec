@@ -8,7 +8,8 @@ import Login from "./components/login/Login";
 // import Footer from './components/footer/Footer'
 import About from "./components/pages/About";
 import MyCart from "./components/mycart/MyCart";
-import Error from './components/pages/Error'
+import Error from './components/pages/Error';
+import Register from "./components/register/Register";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route path="/product/:cNo/:title" element={<SingleCard />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register/>} />
           <Route path="/MyCart" element={<MyCart />} />
           <Route path="/about" element={<About />} />
           <Route path="/*" element={<Error />} />

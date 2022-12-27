@@ -1,56 +1,77 @@
 const bcrypt = require("bcrypt");
-const { generate } = require("otp-generator");
 const User = require("../schemas/userSchema");
 
-const registerByMail = async (req, res) => {
+const register = async (req, res) => {
   let user = new User({
-    fName: "",
-    lName: "",
+    fullName: "",
     email: "",
     password: "",
+    cpassword:""
   });
-  user.fName = req.body.fName;
-  user.lName = req.body.lName;
+
+  user.fullName = req.body.fullName;
   user.email = req.body.email;
   user.password = await bcrypt.hash(req.body.password, 3);
 
-  const userExist = await User.findOne({ email: user.email });
-  if (userExist) {
-    return res.json({ staus: 404, message: "Email already exist!" });
-  }
-  if(req.body.password.length<8){
-    return res.json({ staus: 404, message: "Your password must be 8 characters!" });
+  if((req.body.fullName || req.body.email || req.body.password || req.body.cpassword) === "" ){
+    return res.json({
+      staus: 406,
+      message: "The field cannot be Empty.",
+    });
   }
 
-  user.save(function (err, data) {
+  if (req.body.password.length < 8) {
+    return res.json({
+      staus: 404,
+      message: "Your password must be 8 characters.",
+    });
+  }
+
+  if(req.body.password != req.body.cpassword){
+    return res.json({
+      status:205,
+      message:"Password and Confirm Password must be match.",
+    })
+  }
+
+  const userExist = await User.findOne({ email: user.email });
+  if (userExist) {
+    return res.json({ staus: 402, message: "Email already Exist." });
+  }
+
+   user.save(function (err, data) {
     if (err) {
-      res.send(err);
+      res.json({staus:401,message:"Invalid Registration"});
     } else {
-      res.send("Sucessfully Registered!");
+      res.json({status:201,message:"Sucessfully Registered!"});
     }
   });
 };
 
-const registerByMobile = (req,res) =>{
-    res.send(generate(4,{lowerCaseAlphabets:false,upperCaseAlphabets:false,specialChars:false}))
-}
+const login = (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
 
-const login = async (req, res) => {
-  const em = req.body.email;
-  const ps = req.body.password;
-  User.findOne({ email: em }, (err, docs) => {
+  if((email || password) === "" ){
+    return res.json({
+      staus: 406,
+      message: "The field cannot be Empty.",
+    });
+  }
+
+  User.findOne({ email: email }, (err, docs) => {
     if (docs) {
-      bcrypt.compare(ps, docs.password, (error, result) => {
+      bcrypt.compare(password, docs.password, (error, result) => {
         if (result === true) {
-          res.json({ staus: 205, message: "sucessfully login!" });
+          res.json({ staus: 205, message: "Sucessfully Login!" });
         } else {
-          res.json({ staus: 201, message: "wrong password!" });
+          res.json({ staus: 201, message: "Please check your password." });
         }
       });
     } else {
-      res.json({ status: 404, message: "check your mail!" });
+      res.json({ status: 404, message: "Please check your gmail." });
     }
   });
 };
 
-module.exports = { registerByMail, login,registerByMobile };
+module.exports = { register, login };

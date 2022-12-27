@@ -10,7 +10,7 @@ const Nav = () => {
 
   const handleLogout = () => {
     setIsLogin(false);
-    window.localStorage.clear();
+    window.localStorage.removeItem("Token");
   };
 
   const handleSubmit = () => {};
@@ -36,10 +36,17 @@ const Nav = () => {
             <BiSearch className="search_img" />
           </form>
         </div>
-
-        <div className="seller">
-          <h4>Become a Seller</h4>
-        </div>
+        {isLogin ? (
+          <button className="login_btn" onClick={handleLogout}>
+            LogOut
+          </button>
+        ) : (
+          <Link to={"/Login"}>
+            <button type="button" className="login_btn">
+              LogIn
+            </button>
+          </Link>
+        )}
 
         <div className="nav_profile">
           <div className="common">
@@ -47,22 +54,16 @@ const Nav = () => {
           </div>
           <Link to="/MyCart">
             <div className="common">
-              <BsCart2 /> ({cartItems[0].id===0?0:cartItems.length}) Bag
+              <BsCart2 /> ({cartItems[0].id === 0 ? 0 : cartItems.length}) Bag
             </div>
           </Link>
         </div>
 
-        {isLogin ? (
-          <button className="login_btn" onClick={handleLogout}>
-            Logout
+        <Link to={"/register"}>
+          <button type="button" className="register_btn">
+            SignUp
           </button>
-        ) : (
-          <Link to={"/Login"}>
-            <button type="submit" className="login_btn">
-              Login
-            </button>
-          </Link>
-        )}
+        </Link>
       </div>
     </nav>
   );

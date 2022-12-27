@@ -1,21 +1,24 @@
+const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const useRouter = require("./routes/router");
 
-const DB = "mongodb+srv://shivamB:26i8KJA58wAGwmP2@cluster0.gxjbelh.mongodb.net/ecomDB?retryWrites=true&w=majority";
-mongoose.set('strictQuery', false);
+dotenv.config({path:"./config.env"});
+const DB = process.env.DATABASE;
+
+mongoose.set("strictQuery", false);
 
 mongoose.connect(DB).then(() => {
-    console.log("connection sucessfull");
-  }).catch((error) => {
-    console.log(error);
+    console.log("connection sucessfully");
+  })
+  .catch((error) => {
+    console.log("no connection");
   });
 
-app.use("/api", useRouter);
-
+app.use("/", useRouter),
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.send("hello ");
 });
 
 app.listen(5000, () => {

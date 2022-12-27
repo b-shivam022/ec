@@ -2,10 +2,10 @@
   margin-top: 5rem;
   display: flex;
   row-gap: 5rem;
-  column-gap: 3rem;
+  column-gap: 2rem;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 0 100px;
+  padding: 0 60px;
 }
 
 .single_card {

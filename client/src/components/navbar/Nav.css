@@ -59,6 +59,15 @@ nav .nav_bar {
     cursor: pointer;
 }
 
+.register_btn{
+    border: none;
+    color: rgb(4, 103, 164);
+    font-size: 17px;
+    padding: 5px 20px;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
 .seller{
     font-size: 18px;
     color: white;
