@@ -21,7 +21,7 @@ const Login = () => {
 
   const PostData = () => {
     setIsClicked(true);
-    Axios.post("/login", {
+    Axios.post("/api/v1/users/login", {
       email: userEmail,
       password: password,
     }).then((response) => {
