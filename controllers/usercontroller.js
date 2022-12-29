@@ -12,6 +12,7 @@ const register = async (req, res) => {
   user.fullName = req.body.fullName;
   user.email = req.body.email;
   user.password = await bcrypt.hash(req.body.password, 3);
+  user.cpassword = await bcrypt.hash(req.body.password, 3);
 
   if((req.body.fullName || req.body.email || req.body.password || req.body.cpassword) === "" ){
     return res.json({
@@ -34,12 +35,12 @@ const register = async (req, res) => {
     })
   }
 
-  const userExist = await User.findOne({ email: user.email });
+  const userExist = User.findOne({ email: user.email });
   if (userExist) {
     return res.json({ staus: 402, message: "Email already Exist." });
   }
 
-   user.save(function (err, data) {
+  user.save(function (err, data) {
     if (err) {
       res.json({staus:401,message:"Invalid Registration"});
     } else {
@@ -47,6 +48,9 @@ const register = async (req, res) => {
     }
   });
 };
+
+
+
 
 const login = (req, res) => {
   const email = req.body.email;
@@ -73,5 +77,6 @@ const login = (req, res) => {
     }
   });
 };
+
 
 module.exports = { register, login };

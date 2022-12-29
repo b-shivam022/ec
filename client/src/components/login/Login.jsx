@@ -20,16 +20,13 @@ const Login = () => {
   };
 
   const PostData = () => {
-
     setIsClicked(true);
-
     Axios.post("/login", {
       email: userEmail,
       password: password,
     }).then((response) => {
       console.log(response);
-      
-      if(response.data.message==="Sucessfully login!"){
+      if(response.data.message === "Sucessfully login!"){
         navigate('/');
       }
       else{

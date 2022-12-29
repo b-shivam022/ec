@@ -42,8 +42,6 @@ const Register = () => {
       }),
     });
 
-    setShowMessage(response.json.message);
-
     const data = await response.json();
 
     if (data.status === 401 || !data) {

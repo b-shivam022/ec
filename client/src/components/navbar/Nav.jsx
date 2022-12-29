@@ -59,11 +59,11 @@ const Nav = () => {
           </Link>
         </div>
 
-        <Link to={"/register"}>
+        {!isLogin? (<Link to={"/register"}>
           <button type="button" className="register_btn">
             SignUp
           </button>
-        </Link>
+        </Link>) : ""}
       </div>
     </nav>
   );
