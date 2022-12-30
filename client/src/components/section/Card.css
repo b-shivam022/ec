@@ -1,12 +1,12 @@
 .card {
-  margin-top: 5rem;
+  margin: 5rem 0;
   display: flex;
   row-gap: 5rem;
-  column-gap: 2rem;
+  column-gap: 3.4rem;
+  margin-left: 30px;
   flex-direction: row;
   flex-wrap: wrap;
   padding: 0 60px;
-  margin-left: 0px;
 }
 
 .single_card {
