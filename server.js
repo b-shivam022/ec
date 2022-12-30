@@ -1,35 +1,49 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const express = require("express");
-const cors = require("cors");
 const app = express();
-const useRouter = require("./server/routes/router");
+const useRouter = require("./routes/router");
 const path = require("path");
-
-const PORT = 8080 || process.env.PORT;
 
 dotenv.config({path:"./config.env"});
 
 const DB = process.env.DATABASE;
 
-app.use(cors());  
+mongoose.set('strictQuery', false);
 
-app.use("/api/v1/users", useRouter);
+const connectDB = async () => {
+  try {
+    await mongoose.connect(DB);
+    console.log("database connected sucessfully");
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+}
 
-app.use(express.static(path.join(__dirname,'./client/build')))
+// mongoose.connect(DB).then(() => {
+//   console.log("connection sucessfully");
+// })
+// .catch((error) => {
+//   console.log("no connection");
+// }) 
+
+app.use("/", useRouter);
+
+app.use(express.static(path.join(__dirname,'./client/build')));
 
 app.get('*', (req, res) => {
-  res.send(path.join(__dirname,"./client/build/index.html"));
+  res.sendFile(path.join(__dirname,'./client/build/index.html'));
 });
 
-mongoose.connect(DB).then(() => {
-  console.log("connection sucessfully");
+const PORT = 5000 || process.env.PORT;
+
+// app.listen(PORT, () => {
+//   console.log("server is running on port 5000");
+// });
+
+connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log("server is running on port 8080");
-  });
+      console.log("server is running on port 5000");
+  })
 })
-.catch((error) => {
-  console.log("no connection");
-});
-
-mongoose.set("strictQuery", false);

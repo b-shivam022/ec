@@ -5,9 +5,11 @@ import "./Login.css";
 
 
 const Login = () => {
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [goHome,setGoHome] = useState(false);
 
   const [isClicked, setIsClicked] = useState(false);
   const [showMessage, setShowMessage] = useState("");
@@ -21,13 +23,13 @@ const Login = () => {
 
   const PostData = () => {
     setIsClicked(true);
-    Axios.post("/api/v1/users/login", {
+    Axios.post("/login", {
       email: userEmail,
       password: password,
     }).then((response) => {
       console.log(response);
-      if(response.data.message === "Sucessfully login!"){
-        navigate('/');
+      if(response.data.message === "Sucessfully Login!"){
+        Navigate('/');
       }
       else{
         setShowMessage(response.data.message);

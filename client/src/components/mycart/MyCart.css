@@ -1,7 +1,7 @@
 .myCart {
   width: 80vw;
   margin-top: 2.5rem;
-  height: 520px;
+  height: 480px;
   text-align: center;
   padding: 10px;
   box-shadow: 0 0 7px black;
@@ -21,8 +21,9 @@
 
 .myCart p {
   font-size: x-large;
-  padding: 10px;
-  margin-bottom: 1rem;
+  padding: 5px;
+  color: black;
+  margin-bottom: 0.7rem;
 }
 .myCart_button {
   padding: 10px;
