@@ -35,10 +35,10 @@ const register = async (req, res) => {
     })
   }
 
-  // const userExist = User.findOne({ email: user.email });
-  // if (userExist) {
-  //   return res.json({ staus: 402, message: "Email already Exist." });
-  // }
+  const userExist = User.findOne({ email: user.email });
+  if (userExist) {
+    return res.json({ staus: 402, message: "Email already Exist." });
+  }
 
   user.save(function (err, data) {
     if (err) {
